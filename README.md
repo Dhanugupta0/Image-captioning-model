@@ -44,24 +44,18 @@ This repository contains two different approaches for **image caption generation
 - Repetition penalty for cleaner text.
 
 **Model Architecture:**
-```mermaid
-flowchart TD
-  A[Input Image] --> B[CLIP Image Encoder]
-  B --> C[Image Embedding]
-  C --> D[Embedding Projector (match GPT-2 input)]
-  D --> E[GPT-2 Decoder (conditioned)]
-  
-  subgraph Text_Context
-    T[Optional Prompt: "Describe this image:"] --> E
-  end
-  
-  E --> F[Token Outputs]
-  F --> G[Caption (natural text)]
-  
-  subgraph Fine_tuning
-    E --> Loss2[Language Loss / LM Loss]
-    Loss2 --> Optimize2[Update GPT-2 (and maybe projector)]
-  end
+```mathematica
+Input Image
+   ↓
+CLIP Image Encoder
+   ↓
+Image Embedding
+   ↓
+Embedding Projector (to GPT-2 space)
+   ↓
+GPT-2 (conditioned on embedding + prompt)
+   ↓
+Generated Caption
 
 ```
 ---
@@ -79,20 +73,18 @@ flowchart TD
 - Beam search caption generation.
 
 **Model Architecture:**
-```mermaid
-flowchart TD
-  A[Input Image] --> B[CNN Encoder (e.g., ResNet)]
-  B --> C[Image Feature Vector]
-  C --> D[Feature Projection (optional FC layer)]
-  D --> E[LSTM Decoder]
-  E --> F[Word Predictions generated step-by-step]
-  F --> G[Caption (sequence of words)]
-  
-  subgraph Training
-    E --> H[Teacher Forcing (use true previous word)]
-    H --> Loss[Cross-Entropy Loss]
-    Loss --> Optimize[Update weights]
-  end
+```mathematica
+Input Image
+   ↓
+ CNN Encoder (ResNet)
+   ↓
+ Image Feature Vector
+   ↓
+ Feature Projection (FC)
+   ↓
+ LSTM Decoder -------> Word by word predictions
+   ↓
+ Final Caption
 
 ```
 
