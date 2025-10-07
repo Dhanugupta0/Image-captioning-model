@@ -78,17 +78,19 @@ flowchart TD
 **Model Architecture:**
 ```mermaid
 flowchart TD
-  A[Input Image] --> B[CNN Encoder\n(e.g., ResNet)]
+  A[Input Image] --> B[CNN Encoder (e.g., ResNet)]
   B --> C[Image Feature Vector]
-  C --> D[Feature Projection\n(optional FC layer)]
+  C --> D[Feature Projection (optional FC layer)]
   D --> E[LSTM Decoder]
-  E --> F[Word Predictions\ngenerated step-by-step]
+  E --> F[Word Predictions generated step-by-step]
   F --> G[Caption (sequence of words)]
+  
   subgraph Training
-    E --> H[Teacher Forcing\n(use true previous word)]
+    E --> H[Teacher Forcing (use true previous word)]
     H --> Loss[Cross-Entropy Loss]
     Loss --> Optimize[Update weights]
   end
+
 ```
 ![Model-Architecture](sample_image/cnn-lstm-image.png)
 
