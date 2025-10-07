@@ -92,7 +92,11 @@ flowchart TD
 
 ---
 
-##Example outputs:
+## 📊 Results
+
+Both models generate captions for test images.
+
+Example outputs:
 
 📷 Image: ![Sample image](sample_image/1000344755.jpg)
 
@@ -127,10 +131,6 @@ Option 2: Run Locally
 git clone https://github.com/<Dhanugupta0>/image-captioning.git
 cd image-captioning
 jupyter notebook
-
-📊 Results
-
-Both models generate captions for test images.
 
 💡 Future Improvements
 
