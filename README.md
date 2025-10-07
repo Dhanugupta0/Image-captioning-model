@@ -48,14 +48,17 @@ This repository contains two different approaches for **image caption generation
 flowchart TD
   A[Input Image] --> B[CLIP Image Encoder]
   B --> C[Image Embedding]
-  C --> D[Embedding Projector\n(match GPT-2 input])
+  C --> D[Embedding Projector (match GPT-2 input)]
   D --> E[GPT-2 Decoder (conditioned)]
-  subgraph Text Context
-    T[Optional Prompt]\n(e.g., "Describe this image:") --> E
+  
+  subgraph Text_Context
+    T[Optional Prompt: "Describe this image:"] --> E
   end
+  
   E --> F[Token Outputs]
   F --> G[Caption (natural text)]
-  subgraph Fine-tuning
+  
+  subgraph Fine_tuning
     E --> Loss2[Language Loss / LM Loss]
     Loss2 --> Optimize2[Update GPT-2 (and maybe projector)]
   end
@@ -92,6 +95,7 @@ flowchart TD
   end
 
 ```
+
 ![Model-Architecture](sample_image/cnn-lstm-image.png)
 
 ---
