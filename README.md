@@ -22,13 +22,13 @@ This repository contains two different approaches for **image caption generation
 ## 📂 Project Structure
 
 
-
+```bash
 ├── clip-gpt2.ipynb       # Image captioning using CLIP + GPT-2
 ├── CNN-LSTM.ipynb        # Image captioning using CNN + LSTM
 ├── README.md             # Project overview
 ├── sample_image/         # Folder containing test/output images
 
-
+```
 ---
 
 ## 🚀 Models Overview
@@ -44,18 +44,23 @@ This repository contains two different approaches for **image caption generation
 - Repetition penalty for cleaner text.
 
 **Model Architecture:**
-Input Image
-   ↓
-CLIP Image Encoder
-   ↓
-Image Embedding
-   ↓
-Embedding Projector (to GPT-2 space)
-   ↓
-GPT-2 (conditioned on embedding + prompt)
-   ↓
-Generated Caption
+```mermaid
+flowchart TD
+  A[Input Image] --> B[CLIP Image Encoder]
+  B --> C[Image Embedding]
+  C --> D[Embedding Projector\n(match GPT-2 input])
+  D --> E[GPT-2 Decoder (conditioned)]
+  subgraph Text Context
+    T[Optional Prompt]\n(e.g., "Describe this image:") --> E
+  end
+  E --> F[Token Outputs]
+  F --> G[Caption (natural text)]
+  subgraph Fine-tuning
+    E --> Loss2[Language Loss / LM Loss]
+    Loss2 --> Optimize2[Update GPT-2 (and maybe projector)]
+  end
 
+```
 ---
 
 
@@ -71,18 +76,20 @@ Generated Caption
 - Beam search caption generation.
 
 **Model Architecture:**
-Input Image
-   ↓
- CNN Encoder (ResNet)
-   ↓
- Image Feature Vector
-   ↓
- Feature Projection (FC)
-   ↓
- LSTM Decoder -------> Word by word predictions
-   ↓
- Final Caption
-
+```mermaid
+flowchart TD
+  A[Input Image] --> B[CNN Encoder\n(e.g., ResNet)]
+  B --> C[Image Feature Vector]
+  C --> D[Feature Projection\n(optional FC layer)]
+  D --> E[LSTM Decoder]
+  E --> F[Word Predictions\ngenerated step-by-step]
+  F --> G[Caption (sequence of words)]
+  subgraph Training
+    E --> H[Teacher Forcing\n(use true previous word)]
+    H --> Loss[Cross-Entropy Loss]
+    Loss --> Optimize[Update weights]
+  end
+```
 ![Model-Architecture](sample_image/cnn-lstm-image.png)
 
 ---
