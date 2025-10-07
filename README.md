@@ -11,7 +11,7 @@ Deep learning models for automatic image caption generation using CNN-LSTM and C
 
 - **Flickr30k**: 31,783 images with 158,915 captions
 - Each image has 5 different captions for training diversity
-You can copy this as your README.md file:
+- You can download the dataset by following link:https://www.kaggle.com/datasets/hsankesara/flickr-image-dataset
 
 # 🧠 Image Captioning Projects
 
