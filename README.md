@@ -92,6 +92,14 @@ flowchart TD
 
 ---
 
+##Example outputs:
+
+📷 Image: ![Sample image](sample_image/1000344755.jpg)
+
+🤖 Caption (CLIP-GPT2): "A man is standing on a ladder fixing a window"  
+🤖 Caption (CNN-LSTM): "A man standing on on the window"
+
+
 ## 🧩 Datasets
 Both notebooks use the **Flickr30k** dataset (or similar).  
 Make sure your dataset has:
@@ -123,13 +131,6 @@ jupyter notebook
 📊 Results
 
 Both models generate captions for test images.
-
-Example outputs:
-
-📷 Image: ![Sample image](sample_image/1000344755.jpg)
-
-🤖 Caption (CLIP-GPT2): "A man is standing on a ladder fixing a window"  
-🤖 Caption (CNN-LSTM): "A man standing on on the window"
 
 💡 Future Improvements
 
